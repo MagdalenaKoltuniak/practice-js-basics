@@ -17,16 +17,18 @@ Student.prototype.getAverageGrade = function (subject) {
 		for (const sub in this.grades) {
 			newArr.push(...this.grades[sub]);
 		}
-		return Number((newArr.reduce((acc, curr) => acc + curr, 0) / newArr.length).toFixed(2));
+		return this.calculateAverage(newArr);
 	} else {
 		if (!this.grades[subject]) {
 			return 'Nie ma takiego przedmiotu';
 		} else {
-			return Number(
-				(this.grades[subject].reduce((acc, curr) => acc + curr, 0) / this.grades[subject].length).toFixed(2),
-			);
+			return this.calculateAverage(this.grades[subject]);
 		}
 	}
+};
+
+Student.prototype.calculateAverage = function (arr) {
+	return Number((arr.reduce((acc, curr) => acc + curr, 0) / arr.length).toFixed(2));
 };
 
 const student = new Student('Jan', 'Kowalski');
